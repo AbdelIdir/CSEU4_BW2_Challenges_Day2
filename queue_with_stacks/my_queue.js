@@ -1,48 +1,95 @@
 /**
+Notes:
+You must use only standard operations of a stack -- which means only push to top, peek/pop from top, size, and is empty operations are valid.
+Depending on your language, stack may not be supported natively. You may simulate a stack by using a list or deque (double-ended queue), as long as you use only standard operations of a stack.
+You may assume that all operations are valid (for example, no pop or peek operations will be called on an empty queue).
+*/
+/**
  * Initialize your data structure here.
  */
-var MyQueue = function() {
-    
+var MyQueue = function () {
+  this.stack = new Stack();
 };
-
+var Stack = function () {
+  this.myStack = [];
+};
+Stack.prototype.push = function (x) {
+  this.myStack.push(x);
+};
+Stack.prototype.peek = function () {
+  return this.myStack[myStack.length - 1];
+};
+Stack.prototype.pop = function () {
+  return this.myStack.pop();
+};
+Stack.prototype.size = function () {
+  return this.myStack.length;
+};
+Stack.prototype.isEmpty = function () {
+  return this.myStack.length === 0;
+};
 /**
- * Push element x to the back of queue. 
+ * Push element x to the back of queue.
  * @param {number} x
  * @return {void}
  */
-MyQueue.prototype.push = function(x) {
-    
+MyQueue.prototype.push = function (x) {
+  this.stack.push(x);
 };
 
 /**
  * Removes the element from in front of queue and returns that element.
  * @return {number}
  */
-MyQueue.prototype.pop = function() {
-    
+MyQueue.prototype.pop = function () {
+  var temp_stack = new Stack();
+  var elem;
+  while (!this.stack.isEmpty()) {
+    elem = this.stack.pop();
+    if (!this.stack.isEmpty()) {
+      temp_stack.push(elem);
+    }
+  }
+  while (!temp_stack.isEmpty()) {
+    this.stack.push(temp_stack.pop());
+  }
+  return elem;
 };
 
 /**
  * Get the front element.
  * @return {number}
  */
-MyQueue.prototype.peek = function() {
-    
+MyQueue.prototype.peek = function () {
+  var temp_stack = new Stack();
+  var elem;
+  while (!this.stack.isEmpty()) {
+    elem = this.stack.pop();
+    temp_stack.push(elem);
+  }
+  while (!temp_stack.isEmpty()) {
+    this.stack.push(temp_stack.pop());
+  }
+  return elem;
 };
 
 /**
  * Returns whether the queue is empty.
  * @return {boolean}
  */
-MyQueue.prototype.empty = function() {
-    
+MyQueue.prototype.empty = function () {
+  return this.stack.isEmpty();
 };
 
-/** 
+/**
  * Your MyQueue object will be instantiated and called as such:
- * var obj = new MyQueue()
+ * var obj = Object.create(MyQueue).createNew()
  * obj.push(x)
  * var param_2 = obj.pop()
  * var param_3 = obj.peek()
  * var param_4 = obj.empty()
  */
+
+var obj = Object.create(MyQueue)
+obj.push("yo");
+var param_3 = obj.peek();
