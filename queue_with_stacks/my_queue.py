@@ -7,7 +7,7 @@ class MyQueue:
         self.stack = []
         self.stack_helper = []
 
-    def push(self, x: int) -> None:
+    def push(self, x):
         """
         Push element x to the back of queue.
         """
@@ -16,7 +16,7 @@ class MyQueue:
             while self.stack:
                 self.stack_helper.append(self.stack.pop())
 
-    def pop(self) -> int:
+    def pop(self):
         """
         Removes the element from in front of queue and returns that element.
         """
@@ -25,7 +25,7 @@ class MyQueue:
                 self.stack_helper.append(self.stack.pop())
         return self.stack_helper.pop()
 
-    def peek(self) -> int:
+    def peek(self):
         """
         Get the front element.
         """
@@ -34,7 +34,7 @@ class MyQueue:
                 self.stack_helper.append(self.stack.pop())
         return self.stack_helper[-1]
 
-    def empty(self) -> bool:
+    def empty(self):
         """
         Returns whether the queue is empty.
         """
@@ -42,6 +42,7 @@ class MyQueue:
 
     def __str__(self):
         return str(self.stack)
+
 
 stuff = MyQueue()
 
@@ -51,13 +52,11 @@ stuff.push(38)
 stuff.push(37)
 
 
-print("peek",stuff.peek())
+print("peek", stuff.peek())
 
 print(stuff)
 
 
 print(stuff.pop())
 
-
-
-print(stuff.empty(),"<===== empty ,false or true")
+print(stuff.empty(), "<===== empty ,false or true")
